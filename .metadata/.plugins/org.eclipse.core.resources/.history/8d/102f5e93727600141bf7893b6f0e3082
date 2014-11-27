@@ -27,10 +27,6 @@ public class MainMenu extends Activity {
 	//System Managers
 	SensorManager mSensorManager = null;
 	
-	/**
-	 * This is a test comment to see
-	 * if GitHub will update
-	 */
 	Sensor accelerometer = null;
 	Sensor gyroscope = null;
 	Monitor monitor;	

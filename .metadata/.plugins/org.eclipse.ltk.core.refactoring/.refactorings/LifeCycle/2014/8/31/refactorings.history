@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;lifeCycleDatabase&apos; in &apos;com.rafcarl.lifecycle.ContactItem&apos; to &apos;db&apos;&#x0D;&#x0A;- Original project: &apos;LifeCycle&apos;&#x0D;&#x0A;- Original element: &apos;com.rafcarl.lifecycle.ContactItem.lifeCycleDatabase&apos;&#x0D;&#x0A;- Renamed element: &apos;com.rafcarl.lifecycle.ContactItem.db&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;lifeCycleDatabase&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;com.rafcarl.lifecycle{ContactItem.java[ContactItem^lifeCycleDatabase" name="db" references="true" setter="false" stamp="1406999593247" textual="false" version="1.0"/>
+</session>

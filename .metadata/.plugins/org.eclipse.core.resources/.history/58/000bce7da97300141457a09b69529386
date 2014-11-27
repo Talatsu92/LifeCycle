@@ -1,0 +1,11 @@
+package com.rafcarl.lifecycle;
+
+import android.widget.ProgressBar;
+
+public class Message extends ProgressBar {
+	
+	public Message() {
+	
+	}
+
+}

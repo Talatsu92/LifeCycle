@@ -1,0 +1,4 @@
+1413726501282	Rename field 'ifRotation'
+1413727112515	Rename field 'ifRapidRotation'
+1413727293090	Rename method 'checkImpact'
+1413727306743	Rename method 'detectImpact'

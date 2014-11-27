@@ -1,0 +1,166 @@
+package com.rafcarl.lifecycle;
+
+import android.app.Activity;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class Monitor extends Activity implements SensorEventListener{
+	static final String LOG = "Monitor";
+	static final int SAMPLE_SIZE = 60;//(int) 1200000/SensorManager.SENSOR_DELAY_FASTEST;
+
+	Context context;
+	SensorManager mSensorManager;
+	Sensor accelerometer;
+	Sensor gyroscope;
+
+	public static short accelCount;	
+	public static float accelValues[] = new float[SAMPLE_SIZE];
+
+	public static int config;	
+	public static boolean oneSecondMonitor;
+	public static boolean rotation;
+	public static boolean impact;
+
+	public Monitor(Sensor a, Sensor g, SensorManager m, MainMenu mM) {		
+		Log.i(LOG, "constructor called");
+		mSensorManager = m;
+		accelerometer = a;
+		gyroscope = g;		
+		context = mM;
+	}
+
+	public int obtainConfig(){
+		//0 - No sensors
+		//1 - Only Accelerometer
+		//2 - Accelerometer & Gyroscope
+		Log.i(LOG, "obtainConfig() called");
+
+		int result = 0;
+
+		if(accelerometer != null){
+			if(gyroscope != null){
+				result = 2;
+			}
+			else
+				result = 1;
+		}
+
+		Log.i(LOG, result + " config obtained");
+		return result;
+	}
+
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		int type = event.sensor.getType();
+
+		switch (type) {
+		case Sensor.TYPE_ACCELEROMETER:
+			double sumVector = Math.sqrt(Math.pow(event.values[0], 2) 
+									   + Math.pow(event.values[1], 2)  
+									   + Math.pow(event.values[2], 2))
+									   / SensorManager.GRAVITY_EARTH;
+			if(oneSecondMonitor == false && sumVector <= 0.6){
+				oneSecondMonitor = true;
+				mSensorManager.registerListener(this, gyroscope, SensorManager.SENSOR_DELAY_FASTEST);
+			}
+			else if(oneSecondMonitor == true){
+				if(accelCount < SAMPLE_SIZE){
+					accelValues[accelCount++] = (float) sumVector;
+				}
+				else {
+					mSensorManager.unregisterListener(this);
+					impact = checkImpact();
+					if(impact == true && rotation == true){
+						Toast.makeText(context,"Accident detected", Toast.LENGTH_LONG).show();
+//						ImageButton startButton = (ImageButton) findViewById(R.id.StartButton);
+//						TextView tv = (TextView) findViewById(R.id.StartText);
+//						
+//						startButton.setImageResource(R.drawable.play_icon);
+//						tv.setText(R.string.start);
+						
+							//locate user
+							//prepare messages
+							//prompt user
+							//send messages
+					}
+					else{
+						oneSecondMonitor = false;
+						impact = false;
+						rotation = false;
+						accelCount = 0;
+						mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
+					}
+				}
+			}
+
+			break;
+
+		case Sensor.TYPE_GYROSCOPE:
+			if(oneSecondMonitor == true){
+				if(Math.abs(event.values[0]) >= 8.0f || Math.abs(event.values[1]) >= 8.0f || Math.abs(event.values[2]) >= 8.0f){
+					mSensorManager.unregisterListener(this, gyroscope);
+					rotation = true;
+				}
+			}
+
+			break;
+
+		default:
+			break;
+		}
+
+	}
+
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		// TODO Auto-generated method stub
+	}
+
+	public void startMonitoring(){
+		Log.i(LOG, "startMonitoring() enter");
+		oneSecondMonitor = false;
+		rotation = false;
+		impact = false;
+		accelCount = 0;
+
+		config = obtainConfig();
+		
+		Log.i(LOG, "obtainConfig() exited");
+
+		mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
+	}
+	
+	public void pauseMonitoring(){
+		mSensorManager.unregisterListener(this);
+	}
+
+	public boolean checkImpact(){
+		boolean result = false;
+		int i;
+		float min;
+		float max;
+
+		for(i = 1, min = max = accelValues[0]; i < SAMPLE_SIZE; i++){
+			if(accelValues[i] > max){
+				max = accelValues[i];
+			}
+			if(accelValues[i] < min){
+				min = accelValues[i];
+			}
+		}
+		if((min <= 0.2f) && (max >= 2.0f )){
+			result = true;
+		}
+
+		return result;
+	}
+
+}

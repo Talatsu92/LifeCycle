@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;com.rafcarl.lifecycle.Monitor.obtainSensors()&apos; to &apos;obtainConfig&apos;&#x0D;&#x0A;- Original project: &apos;LifeCycle&apos;&#x0D;&#x0A;- Original element: &apos;com.rafcarl.lifecycle.Monitor.obtainSensors()&apos;&#x0D;&#x0A;- Renamed element: &apos;com.rafcarl.lifecycle.Monitor.obtainConfig()&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;obtainSensors&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;com.rafcarl.lifecycle{Monitor.java[Monitor~obtainSensors" name="obtainConfig" references="true" stamp="1412783676174" version="1.0"/>
+</session>

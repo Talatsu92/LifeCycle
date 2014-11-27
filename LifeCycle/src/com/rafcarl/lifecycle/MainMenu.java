@@ -29,7 +29,9 @@ public class MainMenu extends Activity {
 	
 	/**
 	 * This is a test comment to see
-	 * if GitHub will update
+	 * if GitHub Desktop will ignore
+	 * the .metadata folder 
+	 * from the repository.
 	 */
 	Sensor accelerometer = null;
 	Sensor gyroscope = null;

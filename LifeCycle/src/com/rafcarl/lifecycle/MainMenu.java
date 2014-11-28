@@ -18,6 +18,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/*This is a comment. 11-28-14 Carl*/
+
 public class MainMenu extends Activity {
 	public static final String preferenceFile = "com.rafcarl.lifecycle.flags";
 	SharedPreferences sharedPref = null;

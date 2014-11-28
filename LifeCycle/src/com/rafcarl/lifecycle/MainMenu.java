@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /*This is a comment. 11-28-14 Carl*/
+/*This is a counter comment to your comment. 11-28-14 Rafael*/
 
 public class MainMenu extends Activity {
 	public static final String preferenceFile = "com.rafcarl.lifecycle.flags";

@@ -18,18 +18,28 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainMenu extends Activity implements Dialog.Communicator{
+/*This is a comment. 11-28-14 Carl*/
+
+public class MainMenu extends Activity {
 	public static final String preferenceFile = "com.rafcarl.lifecycle.flags";
 	SharedPreferences sharedPref = null;
 	SharedPreferences.Editor editor = null;
 	public static final String LOG = "MainMenu";
 	
-	Monitor monitor;
+	//System Managers
 	SensorManager mSensorManager = null;
+	
+	/**
+	 * This is a test comment to see
+	 * if GitHub Desktop will ignore
+	 * the .metadata folder 
+	 * from the repository.
+	 */
 	Sensor accelerometer = null;
 	Sensor gyroscope = null;
-		
-	boolean monitoring;
+	Monitor monitor;	
+	
+	static boolean monitoring;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +50,8 @@ public class MainMenu extends Activity implements Dialog.Communicator{
 		
 		monitor = null;
 		monitoring = false;
+		
+		//System Services
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		gyroscope = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
@@ -70,7 +82,8 @@ public class MainMenu extends Activity implements Dialog.Communicator{
 		startButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {	
+			public void onClick(View v) {
+				
 				if(monitoring == false){
 					preMonitorDialog(v);
 				}
@@ -80,6 +93,29 @@ public class MainMenu extends Activity implements Dialog.Communicator{
 			}
 		});
 				
+	}
+	
+	public void testDialog(View v){
+		final AlertDialog.Builder builder= new AlertDialog.Builder(this);
+		builder.setTitle("Test Dialog")
+			   .setMessage("First Message")
+			   .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+				   
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						
+					}
+			   	})
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						builder.setMessage("Second Message");			
+					}
+				});
+		
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 	
 //	@Override
@@ -92,6 +128,8 @@ public class MainMenu extends Activity implements Dialog.Communicator{
 //		Dialog d = new Dialog();
 //		d.show(fm, "Dialog");
 //	}
+	
+	
 	
 
 	public void goToUser(View v){
@@ -168,7 +206,7 @@ public class MainMenu extends Activity implements Dialog.Communicator{
 			}
 		});
 
-		CountDownTimer timer = new CountDownTimer(46000, 1000){
+		CountDownTimer timer = new CountDownTimer(5000, 1000){
 			@Override
 			public void onTick(long millisUntilFinished) {
 				if((millisUntilFinished/1000) == 45){
@@ -185,7 +223,7 @@ public class MainMenu extends Activity implements Dialog.Communicator{
 			@Override
 			public void onFinish() {
 				if(monitor == null){
-					monitor = new Monitor(accelerometer, gyroscope, mSensorManager);
+					monitor = new Monitor(accelerometer, gyroscope, mSensorManager, MainMenu.this);
 					Log.i(LOG, "Monitor() called");
 				}
 				ImageButton startButton = (ImageButton) findViewById(R.id.StartButton);

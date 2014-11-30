@@ -75,6 +75,8 @@
             android:onClick="openAboutDialog"
             android:text="@string/about" />
         
+        <!-- 
+        
         <Button
             android:id="@+id/smsTest"
             style="@android:attr/buttonBarButtonStyle" 
@@ -83,6 +85,8 @@
             android:layout_weight="1"
             android:onClick="goToSMS"
             android:text="SMS"/>
+        
+         -->
         
     </LinearLayout>
 

@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -18,9 +20,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/*This is a comment. 11-28-14 Carl*/
-/*This is a counter comment to your comment. 11-28-14 Rafael*/
-
 public class MainMenu extends Activity {
 	public static final String preferenceFile = "com.rafcarl.lifecycle.flags";
 	SharedPreferences sharedPref = null;
@@ -29,15 +28,13 @@ public class MainMenu extends Activity {
 	
 	//System Managers
 	SensorManager mSensorManager = null;
+	LocationManager locationManager = null;
+	ConnectivityManager connectivityManager = null;
 	
-	/**
-	 * This is a test comment to see
-	 * if GitHub Desktop will ignore
-	 * the .metadata folder 
-	 * from the repository.
-	 */
+	//Sensor variables
 	Sensor accelerometer = null;
 	Sensor gyroscope = null;
+	
 	Monitor monitor;	
 	
 	static boolean monitoring;
@@ -54,6 +51,9 @@ public class MainMenu extends Activity {
 		
 		//System Services
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		
 		accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		gyroscope = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 		
@@ -75,13 +75,14 @@ public class MainMenu extends Activity {
 			});
 
 			AlertDialog dialog = builder.create();	
+			dialog.setCanceledOnTouchOutside(false);
+			dialog.setCancelable(false);
 			dialog.show();
 		}
 		
 		ImageButton startButton = (ImageButton) findViewById(R.id.StartButton);
 		startButton.setImageResource(R.drawable.play_icon);
 		startButton.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				
@@ -94,30 +95,32 @@ public class MainMenu extends Activity {
 			}
 		});
 				
+		
 	}
 	
-	public void testDialog(View v){
-		final AlertDialog.Builder builder= new AlertDialog.Builder(this);
-		builder.setTitle("Test Dialog")
-			   .setMessage("First Message")
-			   .setNegativeButton("Close", new DialogInterface.OnClickListener() {
-				   
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						
-					}
-			   	})
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						builder.setMessage("Second Message");			
-					}
-				});
-		
-		AlertDialog dialog = builder.create();
-		dialog.show();
-	}
+//	public void testDialog(View v){
+//		final AlertDialog.Builder builder= new AlertDialog.Builder(this);
+//		builder.setTitle("Test Dialog")
+//			   .setMessage("First Message")
+//			   .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+//				   
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						
+//					}
+//			   	})
+//				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//					
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						builder.setMessage("Second Message");			
+//					}
+//				});
+//		
+//		AlertDialog dialog = builder.create();
+//		
+//		dialog.show();
+//	}
 	
 //	@Override
 //	public void onDialogMessage(String message) {
@@ -129,8 +132,6 @@ public class MainMenu extends Activity {
 //		Dialog d = new Dialog();
 //		d.show(fm, "Dialog");
 //	}
-	
-	
 	
 
 	public void goToUser(View v){
@@ -228,15 +229,15 @@ public class MainMenu extends Activity {
 					Log.i(LOG, "Monitor() called");
 				}
 				ImageButton startButton = (ImageButton) findViewById(R.id.StartButton);
-				startButton.setImageResource(R.drawable.pause_icon);
-				
 				TextView tv = (TextView) findViewById(R.id.StartText);
+				
+				startButton.setImageResource(R.drawable.pause_icon);				
 				tv.setText(R.string.monitor);
 				
 				monitoring = true;				
 				monitor.startMonitoring();
 				
-				timerDialog.cancel();
+				timerDialog.dismiss();
 			}
 			
 		};
@@ -266,7 +267,7 @@ public class MainMenu extends Activity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				dialog.cancel();				
+				dialog.dismiss();				
 			}
 		});
 

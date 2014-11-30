@@ -33,24 +33,21 @@ public class LocationTracker extends Activity implements LocationListener{
 	float distance = 0;
 
 	String LOG = "LocationTracker";
+	
+	String streetAddress;
 
 	TextView textLong;
 	TextView textLat;
 	TextView textAddr;
 	TextView textType;
 
-	public LocationTracker(TextView textLong, TextView textLat, TextView textAddr, TextView textType, LocationManager locationManager, ConnectivityManager connectivityManager, Context context) {
-		this.textLong = textLong;
-		this.textLat = textLat;
-		this.textAddr = textAddr;
-		this.textType = textType;
-		this.context = context;
+	public LocationTracker(LocationManager locationManager, ConnectivityManager connectivityManager, Context context) {
 		this.locationManager = locationManager;
 		this.connectivityManager = connectivityManager;
 
-		gpsLocation = null;
-		networkLocation = null;
-		mLocation = null;
+		this.gpsLocation = null;
+		this.networkLocation = null;
+		this.mLocation = null;
 	}
 	
 	public void getLocation(){
@@ -77,19 +74,7 @@ public class LocationTracker extends Activity implements LocationListener{
 			}
 		}
 
-		mLocation = checkAccuracy(networkLocation, gpsLocation);
-
-		if(networkLocation != null){
-			textType.setText("network");
-		}
-		if(gpsLocation != null){
-			textType.setText("gps");
-		}
-
-		textLong.setText(Double.toString(mLocation.getLongitude()));
-		textLat.setText(Double.toString(mLocation.getLatitude()));
-
-		displayAddress();
+		this.mLocation = checkAccuracy(networkLocation, gpsLocation);
 	}
 
 	public Location checkAccuracy(Location network, Location gps){
@@ -101,8 +86,8 @@ public class LocationTracker extends Activity implements LocationListener{
 		}
 		return (network.getAccuracy() > gps.getAccuracy()) ? network : gps;
 	}
-
-	public void displayAddress(){
+	
+	public String getStreetAddress(){
 		latitude = mLocation.getLatitude();
 		longitude = mLocation.getLongitude();
 
@@ -116,14 +101,37 @@ public class LocationTracker extends Activity implements LocationListener{
 		}
 		if(addresses != null & addresses.size() > 0){
 			Address address = addresses.get(0);
-			String addressText = String.format("%s, %s, %s", address.getMaxAddressLineIndex() > 0 ?
+			streetAddress = String.format("%s, %s, %s", address.getMaxAddressLineIndex() > 0 ?
 					address.getAddressLine(0) : "", 
 					address.getLocality(),
 					address.getCountryName());
-
-			textAddr.setText(addressText);
 		}
+		
+		return streetAddress;
 	}
+
+//	public void displayAddress(){
+//		latitude = mLocation.getLatitude();
+//		longitude = mLocation.getLongitude();
+//
+//		Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+//		List<Address> addresses = null;
+//		try {
+//			addresses = geocoder.getFromLocation(latitude, longitude, 1);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		if(addresses != null & addresses.size() > 0){
+//			Address address = addresses.get(0);
+//			String addressText = String.format("%s, %s, %s", address.getMaxAddressLineIndex() > 0 ?
+//					address.getAddressLine(0) : "", 
+//					address.getLocality(),
+//					address.getCountryName());
+//
+//			textAddr.setText(addressText);
+//		}
+//	}
 
 	public boolean canGetLocation(){
 		NetworkInfo mWifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);

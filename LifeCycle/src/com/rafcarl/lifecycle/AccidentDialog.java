@@ -1,7 +1,6 @@
 package com.rafcarl.lifecycle;
 
 import java.util.zip.Inflater;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,7 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class AccidentDialog extends DialogFragment {
-	Button yes, no;
+	Button positive, neutral, negative;
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -27,10 +26,8 @@ public class AccidentDialog extends DialogFragment {
 		
 		Dialog dialog = builder.create();
 		dialog.setCanceledOnTouchOutside(false);
-		dialog.setCancelable(false);
+		
 		return dialog;
 	}
-	
-	
 	
 }

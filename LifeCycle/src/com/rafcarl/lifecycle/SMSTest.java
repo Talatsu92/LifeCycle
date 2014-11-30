@@ -43,13 +43,13 @@ public class SMSTest extends Activity{
 				LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 				ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 				
-				LocationTracker locationTracker = new LocationTracker(textLong, textLat, textAddr, textType, locationManager, connectivityManager, SMSTest.this);
-				if(locationTracker.canGetLocation()){
-					locationTracker.getLocation();
-				}
-				else{
-					Toast.makeText(getBaseContext(), "Cannot determine location at this time", Toast.LENGTH_SHORT).show();
-				}
+//				LocationTracker locationTracker = new LocationTracker(textLong, textLat, textAddr, textType, locationManager, connectivityManager, SMSTest.this);
+//				if(locationTracker.canGetLocation()){
+//					locationTracker.getLocation();
+//				}
+//				else{
+//					Toast.makeText(getBaseContext(), "Cannot determine location at this time", Toast.LENGTH_SHORT).show();
+//				}
 				
 			}
 		});

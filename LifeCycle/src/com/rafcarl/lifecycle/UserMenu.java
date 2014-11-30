@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 public class UserMenu extends Activity {
 
-	SharedPreferences userpref, sharedPref;
+	SharedPreferences sharedPref;
 
 	TextView name;
 	TextView age;
@@ -31,7 +31,8 @@ public class UserMenu extends Activity {
 	TextView meds;
 	TextView conds;
 	TextView allergs;
-	public static final String PREF = "UserPrefs" ;
+	
+	public static final String preferenceFile = "com.rafcarl.lifecycle.flags";
 	public static final String Name = "nameKey"; 
 	public static final String Age = "ageKey"; 
 	public static final String Blood = "bloodKey"; 
@@ -42,7 +43,7 @@ public class UserMenu extends Activity {
 	public static final String Meds = "medKey";
 	public static final String Conds = "condtKey";
 	public static final String Allergs = "allergKey";
-
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,18 +60,18 @@ public class UserMenu extends Activity {
 		conds = (TextView) findViewById(R.id.user_multi2_i);
 		allergs = (TextView) findViewById(R.id.user_multi3_i);
 		
-		userpref = getSharedPreferences(PREF, Context.MODE_PRIVATE);
+		sharedPref = getSharedPreferences(preferenceFile, Context.MODE_PRIVATE);
 		
-		if(userpref.contains(Name)){name.setText(userpref.getString(Name, ""));}
-		if(userpref.contains(Age)){age.setText(userpref.getString(Age, ""));}
-		if(userpref.contains(Blood)){blood.setSelection(userpref.getInt(Blood, 0));}
-		if(userpref.contains(Anti)){anti.setSelection(userpref.getInt(Anti, 0));}
-		if(userpref.contains(Height)){height.setText(userpref.getString(Height, ""));}
-		if(userpref.contains(HeightSpin)){heightspin.setSelection(userpref.getInt(HeightSpin, 0));}
-		if(userpref.contains(Weight)){weight.setText(userpref.getString(Weight, ""));}
-		if(userpref.contains(Meds)){meds.setText(userpref.getString(Meds, ""));}
-		if(userpref.contains(Conds)){conds.setText(userpref.getString(Conds, ""));}
-		if(userpref.contains(Allergs)){allergs.setText(userpref.getString(Allergs, ""));}
+		if(sharedPref.contains(Name)){name.setText(sharedPref.getString(Name, ""));}
+		if(sharedPref.contains(Age)){age.setText(sharedPref.getString(Age, ""));}
+		if(sharedPref.contains(Blood)){blood.setSelection(sharedPref.getInt(Blood, 0));}
+		if(sharedPref.contains(Anti)){anti.setSelection(sharedPref.getInt(Anti, 0));}
+		if(sharedPref.contains(Height)){height.setText(sharedPref.getString(Height, ""));}
+		if(sharedPref.contains(HeightSpin)){heightspin.setSelection(sharedPref.getInt(HeightSpin, 0));}
+		if(sharedPref.contains(Weight)){weight.setText(sharedPref.getString(Weight, ""));}
+		if(sharedPref.contains(Meds)){meds.setText(sharedPref.getString(Meds, ""));}
+		if(sharedPref.contains(Conds)){conds.setText(sharedPref.getString(Conds, ""));}
+		if(sharedPref.contains(Allergs)){allergs.setText(sharedPref.getString(Allergs, ""));}
 	}
 
 	@Override
@@ -123,7 +124,7 @@ public class UserMenu extends Activity {
 		String c = conds.getText().toString();
 		String al = allergs.getText().toString();
 
-		Editor editor = userpref.edit();
+		Editor editor = sharedPref.edit();
 		editor.putString(Name, n);
 		editor.putString(Age, a);
 		editor.putInt(Blood, b);
@@ -164,7 +165,7 @@ public class UserMenu extends Activity {
 	public void clearUserInfo(View view){
 		ViewGroup group = (ViewGroup) findViewById(R.id.scrollView1);
 		clearForm(group);
-		Editor editor = userpref.edit();
+		Editor editor = sharedPref.edit();
 		editor.clear();
 		editor.commit();
 		Toast.makeText(this, "Cleared", Toast.LENGTH_LONG).show();

@@ -47,7 +47,7 @@
     <string name="multi_input3">Allergies</string>
     <string name="user_submit">Save</string>
     <string name="user_clear">Clear</string>
-    <string name="redirectContacts">Now to the Contacts Menu for a little more info. . .</string>
+    <string name="redirectContacts">Now to the Contacts Menu to set your contact numbers.</string>
 
     <!-- Contacts Menu Strings -->
     <string name="title_activity_contacts_menu">Emergency Contacts</string>

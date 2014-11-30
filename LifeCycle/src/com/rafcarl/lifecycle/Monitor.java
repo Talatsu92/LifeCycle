@@ -2,6 +2,7 @@ package com.rafcarl.lifecycle;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -64,7 +65,7 @@ public class Monitor extends Activity implements SensorEventListener{
 
 		switch (type) {
 		case Sensor.TYPE_ACCELEROMETER:
-			double sumVector = Math.sqrt(Math.pow(event.values[0], 2) 
+			float sumVector = (float) Math.sqrt(Math.pow(event.values[0], 2) 
 									   + Math.pow(event.values[1], 2)  
 									   + Math.pow(event.values[2], 2))
 									   / SensorManager.GRAVITY_EARTH;
@@ -74,7 +75,7 @@ public class Monitor extends Activity implements SensorEventListener{
 			}
 			else if(oneSecondMonitor == true){
 				if(accelCount < SAMPLE_SIZE){
-					accelValues[accelCount++] = (float) sumVector;
+					accelValues[accelCount++] = sumVector;
 				}
 				else {
 					mSensorManager.unregisterListener(this);
@@ -88,7 +89,8 @@ public class Monitor extends Activity implements SensorEventListener{
 						tv.setText(R.string.start);
 						
 						MainMenu.monitoring = false;
-						showAccidentDialog(activity);
+						Intent intent = new Intent();
+						
 							//locate user
 							//prepare messages
 							//prompt user
@@ -169,6 +171,7 @@ public class Monitor extends Activity implements SensorEventListener{
 	public void showAccidentDialog(Activity activity){
 		Log.i(LOG, "showAccidentDialog() enter");
 		AccidentDialog accidentDialog = new AccidentDialog();
+//		accidentDialog.setCancelable(false);
 		accidentDialog.show(activity.getFragmentManager(), "AccidentDialog");
 	}
 

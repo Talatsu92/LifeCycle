@@ -95,7 +95,7 @@ public class SMSTest extends Activity{
 	{      
 		String phoneNumber = num.getText().toString();
 		String message = msg.getText().toString();
-
+		
 		try{
 			SmsManager sms = SmsManager.getDefault();
 			sms.sendTextMessage(phoneNumber, null, message, null, null);

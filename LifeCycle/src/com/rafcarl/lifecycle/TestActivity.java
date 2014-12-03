@@ -17,7 +17,6 @@ public class TestActivity extends Activity {
 		dbHelper = new DBHelper(this);
 		
 		SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-		
 	}
 
 }

@@ -46,7 +46,7 @@ public class Monitor extends Activity implements SensorEventListener{
 		Log.i(LOG, "obtainConfig() called");
 
 		int result = 0;
-
+			
 		if(accelerometer != null){
 			if(gyroscope != null){
 				result = 2;
@@ -66,9 +66,9 @@ public class Monitor extends Activity implements SensorEventListener{
 		switch (type) {
 		case Sensor.TYPE_ACCELEROMETER:
 			float sumVector = (float) Math.sqrt(Math.pow(event.values[0], 2) 
-									   + Math.pow(event.values[1], 2)  
-									   + Math.pow(event.values[2], 2))
-									   / SensorManager.GRAVITY_EARTH;
+					+ Math.pow(event.values[1], 2)  
+					+ Math.pow(event.values[2], 2))
+					/ SensorManager.GRAVITY_EARTH;
 			if(oneSecondMonitor == false && sumVector <= 0.6){
 				oneSecondMonitor = true;
 				mSensorManager.registerListener(this, gyroscope, SensorManager.SENSOR_DELAY_FASTEST);
@@ -84,17 +84,17 @@ public class Monitor extends Activity implements SensorEventListener{
 						Log.i(LOG, "Accident detected");
 						ImageButton startButton = (ImageButton) activity.findViewById(R.id.StartButton);
 						TextView tv = (TextView) activity.findViewById(R.id.StartText);
-						
+
 						startButton.setImageResource(R.drawable.play_icon);
 						tv.setText(R.string.start);
-						
+
 						MainMenu.monitoring = false;
-						Intent intent = new Intent();
-						
-							//locate user
-							//prepare messages
-							//prompt user
-							//send messages
+						showAccidentDialog(activity);
+
+						//locate user
+						//prepare messages
+						//prompt user
+						//send messages
 					}
 					else{
 						oneSecondMonitor = false;
@@ -109,12 +109,11 @@ public class Monitor extends Activity implements SensorEventListener{
 			break;
 
 		case Sensor.TYPE_GYROSCOPE:
-			if(oneSecondMonitor == true){
-				if(Math.abs(event.values[0]) >= 4.0f || Math.abs(event.values[1]) >= 4.0f || Math.abs(event.values[2]) >= 4.0f){
-					mSensorManager.unregisterListener(this, gyroscope);
-					rotation = true;
-				}
+			if(Math.abs(event.values[0]) >= 4.0f || Math.abs(event.values[1]) >= 4.0f || Math.abs(event.values[2]) >= 4.0f){
+				rotation = true;
+				mSensorManager.unregisterListener(this, gyroscope);
 			}
+
 
 			break;
 
@@ -137,12 +136,12 @@ public class Monitor extends Activity implements SensorEventListener{
 		accelCount = 0;
 
 		config = obtainConfig();
-		
+
 		Log.i(LOG, "obtainConfig() exited");
 
 		mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
 	}
-	
+
 	public void pauseMonitoring(){
 		mSensorManager.unregisterListener(this);
 	}
@@ -161,17 +160,17 @@ public class Monitor extends Activity implements SensorEventListener{
 				min = accelValues[i];
 			}
 		}
-		if((min <= 0.2f) && (max >= 2.0f )){
+		if((min <= 0.2f) && (max >= 2.2f )){
 			result = true;
 		}
 
 		return result;
 	}
-	
+
 	public void showAccidentDialog(Activity activity){
 		Log.i(LOG, "showAccidentDialog() enter");
 		AccidentDialog accidentDialog = new AccidentDialog();
-//		accidentDialog.setCancelable(false);
+		//accidentDialog.setCancelable(false);
 		accidentDialog.show(activity.getFragmentManager(), "AccidentDialog");
 	}
 

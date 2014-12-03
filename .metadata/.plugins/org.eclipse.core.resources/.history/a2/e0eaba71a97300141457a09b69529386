@@ -1,9 +1,0 @@
-package com.rafcarl.lifecycle;
-
-public class Message extends ProgressBar {
-	
-	public Message() {
-	
-	}
-
-}

@@ -347,7 +347,7 @@ public class ContactsMenu extends ListActivity {
 	@Override
 	protected void onStop() {
 		super.onStop();
-
+		
 		DBHelper.db.close();
 	}
 }

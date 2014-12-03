@@ -36,10 +36,6 @@ public class LocationTracker extends Activity implements LocationListener{
 	
 	String streetAddress;
 
-	TextView textLong;
-	TextView textLat;
-	TextView textAddr;
-	TextView textType;
 
 	public LocationTracker(LocationManager locationManager, ConnectivityManager connectivityManager, Context context) {
 		this.locationManager = locationManager;
@@ -57,6 +53,11 @@ public class LocationTracker extends Activity implements LocationListener{
 		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
 			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, distance, this);
 		}
+	}
+	
+	public void getCoordinates(double latitude, double longitude){
+		latitude = this.latitude;
+		longitude = this.longitude;
 	}
 
 	public void disconnect(){

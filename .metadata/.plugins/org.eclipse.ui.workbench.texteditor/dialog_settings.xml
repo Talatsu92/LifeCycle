@@ -6,12 +6,13 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="count" key="selection"/>
+		<item value="context" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="context"/>
 			<item value="count"/>
 			<item value="RATE"/>
 			<item value="Log"/>
@@ -19,7 +20,6 @@
 			<item value="DBHelper.db"/>
 			<item value="DBHelper."/>
 			<item value="pos"/>
-			<item value="FirstRun"/>
 		</list>
 		<list key="replacehistory">
 			<item value="Relative"/>

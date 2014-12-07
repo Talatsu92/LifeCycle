@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.database.Cursor;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.telephony.SmsManager;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Message extends Activity{
@@ -16,6 +20,7 @@ public class Message extends Activity{
 	
 	LocationManager locationManager;
 	ConnectivityManager connectivityManager;
+	
 	
 	String streetAddress;
 	double latitude;
@@ -31,13 +36,22 @@ public class Message extends Activity{
 	}
 	
 	//Location-related methods
-	public void getLocation(){
+	public int getLocation(){
 		LocationTracker locationTracker = new LocationTracker(locationManager, connectivityManager, getApplicationContext());
-		locationTracker.getLocation();
-		streetAddress = locationTracker.getStreetAddress();
-		locationTracker.getCoordinates(latitude, longitude);
+		if(locationTracker.canGetLocation()){
+			locationTracker.getLocation();
+			if(locationTracker.mLocation != null){
+				streetAddress = locationTracker.getStreetAddress();
+				locationTracker.getCoordinates(latitude, longitude);
+			}
 		
-		locationTracker.disconnect();
+			locationTracker.disconnect();
+			return 1;
+		}
+		else{
+			Toast.makeText(getApplicationContext(), "Unable to retrieve location", Toast.LENGTH_LONG).show();
+			return 0;
+		}
 	}
 	
 	public void convertToDMS(){
@@ -61,6 +75,10 @@ public class Message extends Activity{
 		second = temp * 60;
 		
 		longitudeDMS = degree + "°" + minute + "'" + second + "\"";
+	}
+	
+	public void promptUser(AccidentDialog accidentDialog){
+		
 	}
 	
 	public void sendMessage(){

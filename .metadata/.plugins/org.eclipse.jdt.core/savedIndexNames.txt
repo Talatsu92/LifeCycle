@@ -1,5 +1,4 @@
 INDEX VERSION 1.127+D:\Documents\Eclipse Workspace\Thesis Application\.metadata\.plugins\org.eclipse.jdt.core
-2962926479.index
 453919709.index
 1151930440.index
 2488531575.index

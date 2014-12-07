@@ -30,13 +30,6 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>res/drawable-mdpi/ic_action_user_add.png</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Downloads/CS/Android_Design_Icons_20131106/Android%20Design%20-%20Icons%2020131120/Core_Icons/unstyled/hdpi/ic_action_user_add.png</locationURI>
-		</link>
-	</linkedResources>
 	<variableList>
 		<variable>
 			<name>Android_SDK</name>

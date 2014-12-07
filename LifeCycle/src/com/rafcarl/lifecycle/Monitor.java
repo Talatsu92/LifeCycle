@@ -7,6 +7,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,6 +22,8 @@ public class Monitor extends Activity implements SensorEventListener{
 	Activity activity;
 	Context context;
 	SensorManager mSensorManager;
+	LocationManager locationManager;
+	ConnectivityManager connectivityManager;
 	Sensor accelerometer;
 	Sensor gyroscope;
 
@@ -31,11 +35,13 @@ public class Monitor extends Activity implements SensorEventListener{
 	public static boolean rotation;
 	public static boolean impact;
 
-	public Monitor(Sensor a, Sensor g, SensorManager m, Activity act) {		
+	public Monitor(Sensor a, Sensor g, SensorManager m, LocationManager lM, ConnectivityManager cM, Activity act) {		
 		Log.i(LOG, "constructor called");
 		mSensorManager = m;
 		accelerometer = a;
-		gyroscope = g;		
+		gyroscope = g;
+		locationManager = lM;
+		connectivityManager = cM;
 		activity = act;
 	}
 
@@ -89,8 +95,16 @@ public class Monitor extends Activity implements SensorEventListener{
 						tv.setText(R.string.start);
 
 						MainMenu.monitoring = false;
-						showAccidentDialog(activity);
-
+						AccidentDialog accidentDialog = new AccidentDialog();
+						accidentDialog.show(activity.getFragmentManager(), "Accident Dialog");
+//						Message message = new Message(locationManager, connectivityManager);
+//						if(message.getLocation() == 1){
+//							message.convertToDMS();
+//							message.getContacts();
+//							message.promptUser(accidentDialog);
+//						}
+						
+						
 						//locate user
 						//prepare messages
 						//prompt user
@@ -167,11 +181,6 @@ public class Monitor extends Activity implements SensorEventListener{
 		return result;
 	}
 
-	public void showAccidentDialog(Activity activity){
-		Log.i(LOG, "showAccidentDialog() enter");
-		AccidentDialog accidentDialog = new AccidentDialog();
-		//accidentDialog.setCancelable(false);
-		accidentDialog.show(activity.getFragmentManager(), "AccidentDialog");
-	}
+	
 
 }

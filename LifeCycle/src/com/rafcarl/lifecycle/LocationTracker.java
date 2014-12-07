@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class LocationTracker extends Activity implements LocationListener{
+	String LOG = "LocationTracker";
 	Context context;
 
 	LocationManager locationManager;
@@ -31,11 +32,8 @@ public class LocationTracker extends Activity implements LocationListener{
 	double longitude;
 	long time = 0;
 	float distance = 0;
-
-	String LOG = "LocationTracker";
 	
 	String streetAddress;
-
 
 	public LocationTracker(LocationManager locationManager, ConnectivityManager connectivityManager, Context context) {
 		this.locationManager = locationManager;
@@ -65,7 +63,7 @@ public class LocationTracker extends Activity implements LocationListener{
 	}
 
 	@Override
-	public void onLocationChanged(Location location) {
+	public void onLocationChanged(Location location) {		
 		if(location != null){
 			if(location.getProvider().equals(LocationManager.NETWORK_PROVIDER)){
 				networkLocation = location;

@@ -95,7 +95,6 @@ public class MainMenu extends Activity {
 			}
 		});
 				
-		
 	}
 	
 //	public void testDialog(View v){
@@ -225,7 +224,7 @@ public class MainMenu extends Activity {
 			@Override
 			public void onFinish() {
 				if(monitor == null){
-					monitor = new Monitor(accelerometer, gyroscope, mSensorManager, MainMenu.this);
+					monitor = new Monitor(accelerometer, gyroscope, mSensorManager, locationManager, connectivityManager, MainMenu.this);
 					Log.i(LOG, "Monitor() called");
 				}
 				ImageButton startButton = (ImageButton) findViewById(R.id.StartButton);

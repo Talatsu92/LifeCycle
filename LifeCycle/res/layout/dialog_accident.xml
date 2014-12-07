@@ -1,23 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-	
-    <TextView
-        android:id="@+id/accident_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        style="@android:style/TextAppearance.DeviceDefault.Small"        
-        android:text="Preparing emergency message... " />
-    
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginStart="8dp">
+
     <ProgressBar
         android:id="@+id/accident_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="4dp" 
-        android:layout_toLeftOf="@id/accident_text" />"
+		android:layout_gravity="center_vertical">
+    </ProgressBar>
 
-    
+    <LinearLayout
+        android:id="@+id/accident_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/accident_locate"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Obtain user location " />
+
+        <TextView
+            android:id="@+id/accident_contacts"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Assemble contacts " />
+
+        <TextView
+            android:id="@+id/accident_message"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="Prepare messages " />
+    </LinearLayout>
+
+</LinearLayout>

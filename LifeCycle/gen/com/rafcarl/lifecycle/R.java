@@ -27,10 +27,12 @@ public final class R {
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int pause_icon=0x7f020001;
-        public static final int play_icon=0x7f020002;
-        public static final int play_pause=0x7f020003;
+        public static final int ic_action_user=0x7f020000;
+        public static final int ic_action_users=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int pause_icon=0x7f020003;
+        public static final int play_icon=0x7f020004;
+        public static final int play_pause=0x7f020005;
     }
     public static final class id {
         public static final int About=0x7f0a0017;
@@ -47,9 +49,12 @@ public final class R {
         public static final int accelInfo=0x7f0a0019;
         public static final int accelStart=0x7f0a001c;
         public static final int accelValues=0x7f0a0018;
-        public static final int accident_progress=0x7f0a0049;
-        public static final int accident_text=0x7f0a0048;
-        public static final int action_settings=0x7f0a004b;
+        public static final int accident_contacts=0x7f0a004b;
+        public static final int accident_locate=0x7f0a004a;
+        public static final int accident_message=0x7f0a004c;
+        public static final int accident_progress=0x7f0a0048;
+        public static final int accident_text=0x7f0a0049;
+        public static final int action_settings=0x7f0a004e;
         public static final int addContact=0x7f0a0009;
         public static final int addDeleteButtons=0x7f0a0008;
         public static final int addressi=0x7f0a0029;
@@ -76,7 +81,7 @@ public final class R {
         public static final int scrollView1=0x7f0a002a;
         public static final int sensorStop=0x7f0a001e;
         public static final int smsBtn=0x7f0a0021;
-        public static final int testButton=0x7f0a004a;
+        public static final int testButton=0x7f0a004d;
         public static final int textMessage=0x7f0a0004;
         public static final int textName=0x7f0a0000;
         public static final int textNumber=0x7f0a0003;

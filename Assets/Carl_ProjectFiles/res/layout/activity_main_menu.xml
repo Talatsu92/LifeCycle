@@ -11,12 +11,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/app_name"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="25dp"
         android:clickable="true"
-        android:onClick="goToSMS" />
+        android:onClick="goToSMS"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ToggleButton
         android:id="@+id/StartButton"
@@ -55,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:contentDescription="@string/app_name"
             android:onClick="goToUser"
             android:src="@drawable/user_icon" />
 
@@ -64,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:contentDescription="@string/app_name"
             android:onClick="goToContacts"
             android:src="@drawable/contacts_icon" />
 
@@ -73,6 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:contentDescription="@string/app_name"
             android:onClick="goToHelp"
             android:src="@drawable/help_icon" />
 
@@ -82,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:contentDescription="@string/app_name"
             android:onClick="openAboutDialog"
             android:src="@drawable/about_icon" />
     </LinearLayout>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
-	
+
     <TextView
         android:id="@+id/AppName"
         android:layout_width="wrap_content"
@@ -33,50 +33,50 @@
 
     <LinearLayout
         android:id="@+id/Menus"
-        android:layout_width="match_parent"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp" >
 
-        <Button
+        <ImageView
             android:id="@+id/UserMenu"
-            style="@android:attr/buttonBarButtonStyle"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:clickable="true"
             android:onClick="goToUser"
-            android:text="@string/user" />
+            android:src="@drawable/user_icon" />
 
-        <Button
+        <ImageView
             android:id="@+id/ContactsMenu"
-            style="@android:attr/buttonBarButtonStyle"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:clickable="true"
             android:onClick="goToContacts"
-            android:text="@string/contacts" />
+            android:src="@drawable/contacts_icon" />
 
-        <Button
+        <ImageView
             android:id="@+id/HelpMenu"
-            style="@android:attr/buttonBarButtonStyle"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:clickable="true"
             android:onClick="goToHelp"
-            android:text="@string/help" />
-        
-        <Button
+            android:src="@drawable/help_icon" />
+
+        <ImageView
             android:id="@+id/About"
-            style="@android:attr/buttonBarButtonStyle"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:clickable="true"
             android:onClick="openAboutDialog"
-            android:text="@string/about" />
-        
-        <!-- 
-        
+            android:src="@drawable/about_icon" />
+
+        <!--
         <Button
             android:id="@+id/smsTest"
             style="@android:attr/buttonBarButtonStyle" 
@@ -85,9 +85,8 @@
             android:layout_weight="1"
             android:onClick="goToSMS"
             android:text="SMS"/>
-        
-         -->
-        
+        -->
+
     </LinearLayout>
 
 </RelativeLayout>

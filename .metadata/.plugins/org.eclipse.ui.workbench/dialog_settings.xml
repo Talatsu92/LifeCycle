@@ -30,9 +30,9 @@
 		</list>
 	</section>
 	<section name="NewWizardAction">
-		<item value="org.eclipse.wst.xml.ui.internal.wizards.NewXMLWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<item value="com.android.ide.eclipse.editors.wizards.NewXmlFileWizard.Layout" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
-			<item value="org.eclipse.wst.XMLCategory"/>
+			<item value="com.android.ide.eclipse.wizards.category"/>
 		</list>
 	</section>
 	<section name="FileSystemExportWizard">
@@ -45,9 +45,10 @@
 		<item value="25" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="ImportExportAction">
-		<item value="org.eclipse.egit.ui.internal.clone.GitCloneWizard" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
+		<item value="com.android.ide.eclipse.adt.project.ImportProjectWizard" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
+			<item value="com.android.ide.eclipse.wizards.category"/>
 			<item value="org.eclipse.egit.ui.internal.clone.gitclonecategory"/>
 		</list>
 	</section>

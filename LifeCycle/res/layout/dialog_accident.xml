@@ -2,47 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="8dp"
-    android:layout_marginStart="8dp">
+    android:layout_marginLeft="24dp"
+    android:layout_marginStart="8dp"
+    android:orientation="vertical" >
 
-    <ProgressBar
-        android:id="@+id/accident_progress"
+    <TextView
+        android:id="@+id/dialogAccidentLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical">
-    </ProgressBar>
+        android:text="Location:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <LinearLayout
-        android:id="@+id/accident_text"
+    <TextView
+        android:id="@+id/dialogAccidentMessages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/accident_locate"
-            style="@android:style/TextAppearance.DeviceDefault.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Obtain user location " />
-
-        <TextView
-            android:id="@+id/accident_contacts"
-            style="@android:style/TextAppearance.DeviceDefault.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Assemble contacts " />
-
-        <TextView
-            android:id="@+id/accident_message"
-            style="@android:style/TextAppearance.DeviceDefault.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:text="Prepare messages " />
-    </LinearLayout>
+        android:text="Messages:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

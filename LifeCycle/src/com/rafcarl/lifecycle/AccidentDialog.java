@@ -29,11 +29,11 @@ public class AccidentDialog extends DialogFragment {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
-					
 				}
 			});
 		
 		Dialog dialog = builder.create();
+		
 		dialog.setCanceledOnTouchOutside(false);
 		
 		return dialog;

@@ -1,7 +1,9 @@
 package com.rafcarl.lifecycle;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,6 +12,7 @@ import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -34,8 +37,13 @@ public class Monitor extends Activity implements SensorEventListener{
 	public static boolean oneSecondMonitor;
 	public static boolean rotation;
 	public static boolean impact;
+	
+	AlertDialog.Builder builder = null;
+	AlertDialog alertDialog = null;
+	View view = null;
+	LayoutInflater inflater = null;
 
-	public Monitor(Sensor a, Sensor g, SensorManager m, LocationManager lM, ConnectivityManager cM, Activity act) {		
+	public Monitor(Sensor a, Sensor g, SensorManager m, LocationManager lM, ConnectivityManager cM, Activity act, Context c) {		
 		Log.i(LOG, "constructor called");
 		mSensorManager = m;
 		accelerometer = a;
@@ -43,6 +51,24 @@ public class Monitor extends Activity implements SensorEventListener{
 		locationManager = lM;
 		connectivityManager = cM;
 		activity = act;
+		
+		view = inflater.inflate(R.layout.dialog_accident, null);
+		
+		builder = new AlertDialog.Builder(c);
+		L.m("AlertDialog.Builder() called");
+		
+		builder.setTitle("Accident detected")
+			   .setView(view)
+			   .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+				}
+			});
+		
+		alertDialog = builder.create();
 	}
 
 	public int obtainConfig(){
@@ -95,15 +121,26 @@ public class Monitor extends Activity implements SensorEventListener{
 						tv.setText(R.string.start);
 
 						MainMenu.monitoring = false;
-						AccidentDialog accidentDialog = new AccidentDialog();
-						accidentDialog.show(activity.getFragmentManager(), "Accident Dialog");
+						
+						
+						alertDialog.show();
+						
+//						AccidentDialog accidentDialog = new AccidentDialog();
+//						accidentDialog.show(activity.getFragmentManager(), "Accident Dialog");
+			
 //						Message message = new Message(locationManager, connectivityManager);
+//						Log.i(LOG, "instantiate new Message object");
 //						if(message.getLocation() == 1){
+//							Log.i(LOG, "message.getLocation()");
+//							TextView one = (TextView) findViewById(R.id.accident_locate);
+//							one.setText("Obtain user location " + "\u2713");
 //							message.convertToDMS();
 //							message.getContacts();
 //							message.promptUser(accidentDialog);
 //						}
-						
+//						else{
+//							Toast.makeText(getApplicationContext(), "Unable to retrieve location", Toast.LENGTH_LONG).show();
+//						}
 						
 						//locate user
 						//prepare messages
@@ -127,7 +164,6 @@ public class Monitor extends Activity implements SensorEventListener{
 				rotation = true;
 				mSensorManager.unregisterListener(this, gyroscope);
 			}
-
 
 			break;
 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginStart="8dp">
+
+    <ProgressBar
+        android:id="@+id/accident_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginLeft="16dp"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="4dp"
+		android:layout_marginBottom="4dp">
+    </ProgressBar>
+
+    <LinearLayout
+        android:id="@+id/accident_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical" >
+        
+        <TextView
+            android:id="@+id/accident_locate"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Preparing messages..." />
+
+        <!-- <TextView
+            android:id="@+id/accident_locate"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Obtain user location " />
+
+        <TextView
+            android:id="@+id/accident_contacts"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Assemble contacts " />
+
+        <TextView
+            android:id="@+id/accident_message"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="Prepare messages " /> -->
+    </LinearLayout>
+
+</LinearLayout>

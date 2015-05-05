@@ -35,18 +35,16 @@ public class MainMenu extends Activity {
 	Sensor accelerometer = null;
 	Sensor gyroscope = null;
 	
-	Monitor monitor;	
+	Monitor monitor = null;
 	
 	static boolean monitoring;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_menu);
-
 		getActionBar().hide();
+		setContentView(R.layout.activity_main_menu);
 		
-		monitor = null;
 		monitoring = false;
 		
 		//System Services
@@ -66,9 +64,7 @@ public class MainMenu extends Activity {
 			builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
 
 				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					
-					
+				public void onClick(DialogInterface dialog, int which) {					
 					Intent intent = new Intent(getApplicationContext(), UserMenu.class);
 					startActivity(intent);
 				}
@@ -85,7 +81,6 @@ public class MainMenu extends Activity {
 		startButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
 				if(monitoring == false){
 					preMonitorDialog(v);
 				}
@@ -224,7 +219,9 @@ public class MainMenu extends Activity {
 			@Override
 			public void onFinish() {
 				if(monitor == null){
-					monitor = new Monitor(accelerometer, gyroscope, mSensorManager, locationManager, connectivityManager, MainMenu.this);
+					Context context = getApplicationContext();
+					
+					monitor = new Monitor(accelerometer, gyroscope, mSensorManager, locationManager, connectivityManager, MainMenu.this, context);
 					Log.i(LOG, "Monitor() called");
 				}
 				ImageButton startButton = (ImageButton) findViewById(R.id.StartButton);
@@ -273,7 +270,4 @@ public class MainMenu extends Activity {
 		AlertDialog dialog = builder.create();
 		dialog.show();
 	}
-
-	
-	
 }

@@ -39,6 +39,8 @@ public class MainMenu extends Activity {
 	
 	static boolean monitoring;
 	
+	AlertDialog alertDialog = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -219,7 +221,7 @@ public class MainMenu extends Activity {
 			@Override
 			public void onFinish() {
 				if(monitor == null){
-					Context context = getApplicationContext();
+					Context context = getWindow().getContext();
 					
 					monitor = new Monitor(accelerometer, gyroscope, mSensorManager, locationManager, connectivityManager, MainMenu.this, context);
 					Log.i(LOG, "Monitor() called");

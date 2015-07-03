@@ -11,6 +11,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,8 @@ public class Monitor extends Activity implements SensorEventListener{
 	
 	AlertDialog.Builder builder = null;
 	AlertDialog alertDialog = null;
+	AlertDialog timerDialog = null;
+	
 	View view = null;
 	LayoutInflater inflater = null;
 
@@ -51,10 +54,13 @@ public class Monitor extends Activity implements SensorEventListener{
 		locationManager = lM;
 		connectivityManager = cM;
 		activity = act;
+		context = c;
 		
-		view = inflater.inflate(R.layout.dialog_accident, null);
+		inflater = LayoutInflater.from(context);
 		
-		builder = new AlertDialog.Builder(c);
+		view = inflater.inflate(R.layout.dialog_accident, null, false);
+		
+		builder = new AlertDialog.Builder(context);
 		L.m("AlertDialog.Builder() called");
 		
 		builder.setTitle("Accident detected")
@@ -69,6 +75,47 @@ public class Monitor extends Activity implements SensorEventListener{
 			});
 		
 		alertDialog = builder.create();
+		
+	}
+	
+	//Displays AlertDialog counting down from one minute
+	public void countDown(){
+		timerDialog = new AlertDialog.Builder(context).create();
+		timerDialog.setTitle("Sending message(s) in:");
+		timerDialog.setMessage("0:45");
+		timerDialog.setCanceledOnTouchOutside(false);
+		timerDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Cancel", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();	
+			}
+		});
+
+		CountDownTimer timer = new CountDownTimer(5000, 1000){
+			@Override
+			public void onTick(long millisUntilFinished) {
+				if((millisUntilFinished/1000) == 45){
+					timerDialog.setMessage("00:45");
+				}
+				else if((millisUntilFinished/1000) < 10){
+					timerDialog.setMessage("00:0" + (millisUntilFinished/1000));
+				}
+				else{
+					timerDialog.setMessage("00:" + (millisUntilFinished/1000));
+				}
+			}
+
+			@Override
+			public void onFinish() {
+				
+				
+				timerDialog.dismiss();
+			} 
+		};
+
+		timerDialog.show();
+		timer.start();
 	}
 
 	public int obtainConfig(){
@@ -121,7 +168,8 @@ public class Monitor extends Activity implements SensorEventListener{
 						tv.setText(R.string.start);
 
 						MainMenu.monitoring = false;
-						
+
+						countDown(); 
 						
 						alertDialog.show();
 						

@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 
 public class LocationTrackerG extends Activity 
-							  implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener{
+							  implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener, Runnable{
 	
 	GoogleApiClient googleApiClient = null;
 	LocationRequest locationRequest = null;
@@ -54,10 +54,6 @@ public class LocationTrackerG extends Activity
 		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);	
 	}
 	
-	public void start(){
-		googleApiClient.connect();
-	}
-
 	@Override
 	public void onConnected(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -94,6 +90,12 @@ public class LocationTrackerG extends Activity
 	public void onConnectionFailed(ConnectionResult arg0) {
 		// TODO Auto-generated method stub
 		Toast.makeText(context, "Connection failed", Toast.LENGTH_LONG).show();
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		googleApiClient.connect();
 	}
 	
 }

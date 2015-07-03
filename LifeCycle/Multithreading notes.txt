@@ -59,6 +59,28 @@ Android Threading Architecture
             at the beginning of the run(), set the thread to use background priority by calling Process.setThreadPriority() with THREAD_PRIORITY_BACKGROUND
             reduces resource competition between Runable object's thread and UI thread    
             
+            
+            
+            1. Create class that implements Runnable interface
+            2. In run() method, put code that should run on separate thread
+            3. Have another method
+                a. Create Thread object that accepts Runnable object (2nd constructor)
+                b. Execute using object.start()
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
 
 Android AsyncTask
     Challenges
